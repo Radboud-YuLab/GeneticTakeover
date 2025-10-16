@@ -2,7 +2,7 @@ function [hyb_minV, hyb_Ntot, hyb_Nmol] = hybridGenome(kribo, kpol, intNflag, nu
     % minV              minimum volume in (e-5 um3)
     % Ntot              number of total molecules
     % Nmol              number molecules of each component, in the order of 
-    %                   [x(1...4) y(1 2) z]. See definitions in documentation
+    %                   [x(1...4) y(1 2) z]. See definitions in the Methods section of the paper.
     %
     % kribo             AA per ribosome per unit time
     % kpol              nucleotides per polymerase per unit time
@@ -123,5 +123,6 @@ function [hyb_minV, hyb_Ntot, hyb_Nmol] = hybridGenome(kribo, kpol, intNflag, nu
         hyb_Ntot = 0;
         hyb_Nmol = zeros(15,1);
     end
+
 
 end
