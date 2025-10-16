@@ -1,4 +1,4 @@
-%% Selection of DNA genomes over RNA genomes in early evolution by a stoichiometric selection advantage
+%% Evolutionary selection of DNA genomes over RNA genomes by a stoichiometric selection advantage
 
 % Written in MATLAB R2025a with:
 % - Statistics and Machine Learning Toolbox
@@ -216,4 +216,5 @@ function y = randr(x)
     a = x(1);
     b = x(2);
     y = a + (b-a).*rand;
+
 end
