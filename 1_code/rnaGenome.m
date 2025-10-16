@@ -2,7 +2,7 @@ function [rna_minV, rna_Ntot, rna_Nmol] = rnaGenome(kribo, kpol, intNflag, nucCo
     % minV              minimum volume in (e-5 um3)
     % Ntotal            number of total molecules
     % Nmol              number molecules of each component, in the order of 
-    %                   [x(1...4) y(1 2) z]. See definitions in documentation
+    %                   [x(1...4) y(1 2) z]. See definitions in the Methods section of the paper.
     %
     % kribo             AA per ribosome per unit time
     % kpol              nucleotides per polymerase per unit time
@@ -122,3 +122,4 @@ function [rna_minV, rna_Ntot, rna_Nmol] = rnaGenome(kribo, kpol, intNflag, nucCo
     end
 
 end
+
