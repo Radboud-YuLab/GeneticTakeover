@@ -217,13 +217,33 @@ res4_all(:,:,4:7) = res4(:,:,3:6);
 currentPath = pwd;
 cd('2_results')
 save('kpol_kribo_ratio.mat', 'res4_all');
+
+res4_dim = size(res4_all);
+res4_csv = [];
+kpol_kribo_range = [100 20 3 1 1/3 1/20 1/100]; %now include kpol/kribo = 3
+
+for p = 1:res4_dim(3) %every page a kpol/kribo ratio
+    res4_p = res4_all(:,:,p);
+   
+    for i = 1:res4_dim(1) % every row an fRfP ratio
+        for j = 1:res4_dim(2) %every column an fP
+            res_ij = res4_p{i,j};
+            res_ij(:,20) = fprot_range(j);
+            res_ij(:,21) = fR_over_fP_range(i);
+            res_ij(:,22) = kpol_kribo_range(p);
+            res4_csv = [res4_csv; res_ij];
+        end
+    end
+end
+
+col_names = {'nuc_rRNA','nuc_RP','nuc_pol','nuc_AARS','nuc_tRNA', ...
+    'minV_R','minV_H','minV_G','Ntotal_R', 'Ntotal_H', 'Ntotal_D',...
+    'ribo_R','pol_R','ribo_H', 'pol1_H', 'pol2_H', 'ribo_D', 'pol1_D', 'pol2_D', ...
+    'nuc_y', 'nuc_z_to_nuc_y_ratio', 'kpol_to_kribo_ratio'};
+res4_table = array2table(res4_csv,'VariableNames',col_names);
+writetable (res4_table, 'Table_S4.csv');
+
 cd(currentPath)
-
-disp('all done')
-
-% nb. no csv saved (this would write to 7x21=147 csv's)
-
-
 
 %% local
 
@@ -234,4 +254,5 @@ function y = randr(x)
     y = a + (b-a).*rand;
 
 end
+
 
