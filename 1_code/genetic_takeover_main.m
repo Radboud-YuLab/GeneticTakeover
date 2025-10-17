@@ -125,9 +125,25 @@ toc
 currentPath = pwd;
 cd('2_results')
 save('ribocell_size_3.mat', 'res3' );
-cd(currentPath)
 
-% nb. no csv saved (this would write to 6x7=42 csv's)
+res3_csv = [];
+for i = 1:height(res3) % every row an fRfP ratio
+    for j = 1:width(res3) %every column an fP
+        res_ij = res3{i,j};
+        res_ij(:,20) = fprot_range(j);
+        res_ij(:,21) = fR_over_fP_range(i);
+        res3_csv = [res3_csv; res_ij];
+    end
+end
+
+col_names = {'nuc_rRNA','nuc_RP','nuc_pol','nuc_AARS','nuc_tRNA', ...
+    'minV_R','minV_H','minV_G','Ntotal_R', 'Ntotal_H', 'Ntotal_D',...
+    'ribo_R','pol_R','ribo_H', 'pol1_H', 'pol2_H', 'ribo_D', 'pol1_D', 'pol2_D', ...
+    'nuc_y', 'nuc_z_to_nuc_y_ratio'};
+res3_table = array2table(res3_csv,'VariableNames',col_names);
+writetable (res3_table, 'Table_S3.csv');
+
+cd(currentPath)
 
 
 %% kpol to kribo ratio 
@@ -218,3 +234,4 @@ function y = randr(x)
     y = a + (b-a).*rand;
 
 end
+
